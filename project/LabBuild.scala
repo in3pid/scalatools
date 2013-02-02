@@ -18,7 +18,7 @@ object LabBuild extends Build {
 object BuildSettings {
 
   val buildOrganization = "mh"
-  val buildVersion = "0.0.1-SNAPSHOT"
+  val buildVersion = "0.1.0-SNAPSHOT"
   val buildScalaVersion = "2.10.0"
 
   val buildSettings = Project.defaultSettings ++ Seq(

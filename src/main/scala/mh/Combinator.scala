@@ -13,48 +13,27 @@ import math._
   *
   */
 
-class BitMask(val mask: BigInt) extends AnyVal {
-  def asBitSet = BitSet(indices:_*)
-  def indices = {
-
-    var n = 0
-    var t = mask
-    var out = Vector.empty[Int]
-    while (t != 0) {
-      if (t.testBit(0)) out :+= n
-      t >>= 1
-      n += 1
+class BitMask(val n: Int) extends AnyVal {
+  def mask: Vector[Int] = {
+    def inner(n: Int, i: Int, out: Vector[Int]): Vector[Int] = {
+      if (n == 0) out
+      else inner(n / 2, i + 1, if (n % 2 == 1) out :+ i else out)
     }
-    out
+    inner(n, 0, Vector.empty[Int])
   }
 }
 
 object BitMask {
-  def apply() = new BitMask(BigInt(0))
-  def apply(n: Int) = new BitMask(BigInt(n))
-  def apply(n: BigInt) = new BitMask(n)
-}
-
-object Tools {
-  def remainders[A](
-    n:Int,
-    seq:Seq[A],
-    out:Vector[A]=Vector.empty[A]): Vector[A] =
-    if (n == 0)
-      out
-    else if (n % 2 == 1)
-      remainders(n / 2, seq.tail, out :+ seq(0))
-    else
-      remainders(n / 2, seq.tail, out)
+  def apply(n: Int) = new BitMask(n)
 }
 
 class Combinator[A](val seq: Seq[A]) extends AnyVal {
-  import Tools._
   def numSubsets: Int = pow(2, seq.size).toInt
-  def subset(n: Int): Vector[A] = remainders(n, seq)
+  def subset(n: Int): Vector[A] = BitMask(n).mask.map(seq)
   def subsets = (0 until numSubsets) map subset
   def combinations(k: Int) = seq.combinations(k)
   def permutations = seq.permutations
+//  def partitions =
 }
 
 object Combinator {
