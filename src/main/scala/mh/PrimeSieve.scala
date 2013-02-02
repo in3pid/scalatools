@@ -27,9 +27,3 @@ object PrimeSieve {
   def apply() = new PrimeSieve()
   def apply(n: Int) = new PrimeSieve().extend(n)
 }
-
-object Main {
-  def main(args: Array[String]) {
-
-  }
-}

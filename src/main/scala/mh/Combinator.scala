@@ -20,6 +20,7 @@ class Combinator[A](val seq: Seq[A]) extends AnyVal {
   def combinations(k: Int) = seq.combinations(k)
   def permutations = seq.permutations
 //  def partitions =
+//
 }
 
 object Combinator {
