@@ -1,6 +1,5 @@
-package mh.collection
+package mh
 
-import mh.Combinator
 import org.scalatest.FunSpec
 
 class CounterSuite extends FunSpec {

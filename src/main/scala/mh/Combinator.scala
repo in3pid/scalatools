@@ -4,12 +4,6 @@ import scala.collection.BitSet
 import math._
 
 /**
-  * Numbers encode bitmasks.
-  * Bitmasks encode subsets.
-  * Multimasks can encode multisets and permutations.
-  *
-  * A multimask is just a bitmask with a natural number
-  *  mapped to each set bit.
   *
   */
 

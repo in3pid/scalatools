@@ -1,4 +1,4 @@
-package mh.collection
+package mh
 import math._
 
 class Counter[A](val map: Map[A, Int]) extends AnyVal {
