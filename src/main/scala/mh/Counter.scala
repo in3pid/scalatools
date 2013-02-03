@@ -26,15 +26,15 @@ class Counter[A](val map: Map[A, Int]) extends AnyVal {
 
   def -(key: A): Counter[A] = add(key, -1)
 
-  def ++(keys: Seq[A]): Counter[A] = keys.foldLeft(this)(_+_)
+  def ++(keys: Seq[A]): Counter[A] = (this /: keys)(_+_)
 
-  def --(keys: Seq[A]): Counter[A] = keys.foldLeft(this)(_-_)
+  def --(keys: Seq[A]): Counter[A] = (this /: keys)(_-_)
 
-  def ++(that: Counter[A]): Counter[A] = that.map.foldLeft(this) {
+  def ++(that: Counter[A]): Counter[A] = (this /: that.map) {
     case (r, (key, value)) => r.add(key, value)
   }
 
-  def --(that: Counter[A]): Counter[A] = that.map.foldLeft(this) {
+  def --(that: Counter[A]): Counter[A] = (this /: that.map) {
     case (r, (key, value)) => r.add(key, -value)
   }
 
@@ -42,13 +42,13 @@ class Counter[A](val map: Map[A, Int]) extends AnyVal {
 
   // intersection
   def &(that: Counter[A]): Counter[A] =
-    (keys & that.keys).foldLeft(Counter.empty[A]) { (ctr, key) =>
+    (Counter.empty[A] /: (keys & that.keys)) { (ctr, key) =>
       ctr.set(key, min(count(key), that.count(key)))
     }
 
   // union
   def |(that: Counter[A]): Counter[A] =
-    (keys | that.keys).foldLeft(Counter.empty[A]) { (ctr, key) =>
+    (Counter.empty[A] /: (keys | that.keys)) { (ctr, key) =>
       ctr.set(key, max(count(key), that.count(key)))
     }
 

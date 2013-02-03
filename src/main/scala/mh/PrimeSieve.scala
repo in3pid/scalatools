@@ -1,5 +1,6 @@
-package mh.primesieve
-import collection.BitSet
+package mh
+
+import scala.collection.BitSet
 /**
  * 00000000000...
  *  0 1 1 1 1 ...
