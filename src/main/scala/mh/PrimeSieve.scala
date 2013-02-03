@@ -1,13 +1,6 @@
 package mh
 
 import scala.collection.BitSet
-/**
- * 00000000000...
- *  0 1 1 1 1 ...
- *   0  1  1  ...
- *    1.
- *     0    1 ...
- */
 
 class PrimeSieve(val primes: BitSet=BitSet(2, 3, 5, 7)) extends AnyVal {
   def last = primes.last
